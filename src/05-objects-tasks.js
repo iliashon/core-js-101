@@ -20,8 +20,12 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  this.width = width;
+  this.height = height;
+  this.getArea = function getArea() {
+    return this.width * this.height;
+  };
 }
 
 
@@ -35,8 +39,8 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
 
 
@@ -51,10 +55,21 @@ function getJSON(/* obj */) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
-}
+// const Circle = function Circle(radius) {
+//   this.radius = radius;
+// };
 
+// Circle.prototype.getCircumference = function getCircumference() {
+//   return 2 * Math.PI * this.radius;
+// };
+
+function fromJSON(proto, json) {
+  const jsonParse = JSON.parse(json);
+  const arr = Object.values(jsonParse);
+  const obj = new proto.constructor(...arr);
+  return obj;
+}
+// console.log(fromJSON(Circle.prototype, '{ "radius":10 }'));
 
 /**
  * Css selectors builder
@@ -140,6 +155,59 @@ const cssSelectorBuilder = {
   },
 };
 
+// class CssSelector {
+//   constructor() {
+//     this.str = '';
+//   }
+
+//   element(value) {
+//     this.str += value;
+//     return this;
+//   }
+
+//   id(value) {
+//     this.str += `#${value}`;
+//     return this;
+//   }
+
+//   class(value) {
+//     this.str += `.${value}`;
+//     return this;
+//   }
+
+//   attr(value) {
+//     this.str += `[${value}]`;
+//     return this;
+//   }
+
+//   pseudoClass(value) {
+//     this.str += `:${value}`;
+//     return this;
+//   }
+
+//   pseudoElement(value) {
+//     this.str += `::${value}`;
+//     return this;
+//   }
+
+//   combine(selector1, combinator, selector2) {
+//     this.str += `${selector1.stringify()} ${combinator} ${selector2.stringify()}`;
+//     return this;
+//   }
+
+//   stringify() {
+//     return this.str;
+//   }
+// }
+
+// const cssSelectorBuilder = new CssSelector();
+
+// console.log(cssSelectorBuilder
+//   .combine(
+//     cssSelectorBuilder.element('p').pseudoClass('focus'),
+//     '>',
+//     cssSelectorBuilder.element('a').attr('href$=".png"'),
+//   ).stringify());
 
 module.exports = {
   Rectangle,

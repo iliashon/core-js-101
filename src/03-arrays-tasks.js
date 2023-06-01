@@ -155,8 +155,9 @@ function getUpperCaseStrings(arr) {
  *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
+function getStringsLength(arr) {
+  const numArr = arr.map((elem) => elem.length);
+  return numArr;
 }
 
 /**
@@ -374,8 +375,13 @@ function getPositivesCount(arr) {
  *   [ 'nine','eight','nine','eight'] => [ 'eight','eight','nine','nine']
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
-function sortDigitNamesByNumericOrder(/* arr */) {
-  throw new Error('Not implemented');
+function sortDigitNamesByNumericOrder(arr) {
+  const sortArr = (a, b) => {
+    const mapper = ['zero', 'one', 'two', 'three', 'four',
+      'five', 'six', 'seven', 'eight', 'nine'];
+    return mapper.indexOf(a) - mapper.indexOf(b);
+  };
+  return arr.sort(sortArr);
 }
 
 /**
